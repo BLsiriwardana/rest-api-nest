@@ -5,7 +5,7 @@ import { Model } from 'mongoose';
 import { Book } from './schemas/book.schemas';
 import { CreateBookDto } from './create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
-
+import { Query } from 'express-serve-static-core';
 @Injectable()
 export class BookService {
   constructor(@InjectModel(Book.name) private bookModel: Model<Book>) {}
@@ -15,9 +15,12 @@ export class BookService {
     return createdBook.save();
   }
 
-  async findAll(): Promise<Book[]> {
-    return this.bookModel.find().exec();
+
+  async findAll(filter = {}, page = 1, limit = 10): Promise<Book[]> {
+    const skip = (page - 1) * limit;
+    return this.bookModel.find(filter).skip(skip).limit(limit).exec();
   }
+
 
   async findById(id: string): Promise<Book> {
     const book = await this.bookModel.findById(id).exec();
