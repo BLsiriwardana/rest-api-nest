@@ -1,7 +1,16 @@
+import { IsInt, IsNotEmpty, IsString } from "class-validator";
+
 // create-book.dto.ts
 export class CreateBookDto {
-    readonly title: string;
-    readonly author: string;
-    readonly publishedYear: number;
+  @IsNotEmpty()
+  @IsString()
+  readonly title: string;
+
+  @IsNotEmpty()
+  @IsString()
+  readonly author: string;
+  
+  @IsInt()
+  readonly publishedYear: number;
   }
   
