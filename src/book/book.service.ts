@@ -18,7 +18,7 @@ export class BookService {
 
   async findAll(filter = {}, page = 1, limit = 10): Promise<Book[]> {
     const skip = (page - 1) * limit;
-    return this.bookModel.find(filter).skip(skip).limit(limit).exec();
+    return this.bookModel.find() 
   }
 
 

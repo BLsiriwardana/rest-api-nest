@@ -14,6 +14,11 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  async findAll(filter = {}, page = 3, limit = 10): Promise<User[]> {
+    const skip = (page - 1) * limit;
+    return this.userModel.find(filter).skip(skip).limit(limit).exec();
+  } 
+  
   async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
     const { name, email, password } = signUpDto;
 
