@@ -11,6 +11,9 @@ import { JwtModule } from '@nestjs/jwt';
  
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
    // MongooseModule.forRoot('mongodb+srv://easycodechannel2024:Bihan20040207@rest-api-testing.nbrfffo.mongodb.net/test', {
     MongooseModule.forRoot('mongodb+srv://easycodechannel2024:Bihan20040207@rest-api-testing.nbrfffo.mongodb.net/?retryWrites=true&w=majority&appName=rest-api-testing'),
     BookModule,
